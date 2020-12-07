@@ -11,6 +11,7 @@ namespace edital.Model
         public Inscricao(PessoaJuridica pessoajuridica) 
         {
           this.pessoajuridica = pessoajuridica;
+          this.segmento = new Segmento();
         }
         public Inscricao(PessoaJuridica pessoajuridica, Segmento segmento) 
         {

@@ -11,17 +11,23 @@ namespace edital.Model
       public PessoaJuridica(Endereco endereco)
       {
         this.endereco = endereco;
+        this.representante = new Representante();
+        this.contato = new Contato();
+        this.inscricoes = new List<Inscricao>();
       }
       public PessoaJuridica(Endereco endereco, Representante representante)
       {
         this.endereco = endereco;
         this.representante = representante;
+        this.contato = new Contato();
+        this.inscricoes = new List<Inscricao>();
       }
       public PessoaJuridica(Endereco endereco, Representante representante, Contato contato)
       {
         this.endereco = endereco;
         this.representante = representante;
         this.contato = contato;
+        this.inscricoes = new List<Inscricao>();
       }
       public PessoaJuridica(Endereco endereco, Representante representante, Contato contato, List<Inscricao> inscricoes)
       {
