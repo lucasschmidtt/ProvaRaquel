@@ -7,14 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace edital.Model
 {
-    public sealed class InscricaoDTO: IActionResult
+    public class InscricaoDTO
     {
         public InscricaoDTO()
         {}
         public InscricaoDTO(Inscricao inscricao)
         {
-            pessoajuridica_id = inscricao.pessoajuridica_id; 
-            segmento_id = inscricao.segmento_id;
             pessoajuridica = inscricao.pessoajuridica;
             segmento = inscricao.segmento; 
             flgativo = inscricao.flgativo; 
@@ -22,8 +20,6 @@ namespace edital.Model
             objetivos = inscricao.objetivos; 
             publicoalvo = inscricao.publicoalvo;
         }
-        public int pessoajuridica_id {get; set;}
-        public int segmento_id {get; set;}
         public PessoaJuridica pessoajuridica { get; set; }
         public Segmento segmento { get; set; }
         public bool flgativo { get; set; }
@@ -43,10 +39,10 @@ namespace edital.Model
             return inscricao;
         }
 
-        public async Task ExecuteResultAsync(ActionContext context)
+        /* public async Task ExecuteResultAsync(ActionContext context)
         {
             await new JsonResult(this).ExecuteResultAsync(context);
-        }
+        } */
         
     }
 }

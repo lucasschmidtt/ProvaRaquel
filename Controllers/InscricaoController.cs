@@ -47,31 +47,33 @@ namespace edital.Controllers
 
         //POST: api/Inscricao
         [HttpPost]
-        public async Task<IActionResult> CadastrarInscricao([FromBody] InscricaoDTO inscricao)
+        public ActionResult<string> CadastrarInscricao(InscricaoDTO inscricao)
         { 
-            //InscricaoDTO jsonString = JsonSerializer.Deserialize<InscricaoDTO>(novoInscricao);
-            
-            /* bool resp = _inscricaoService.CadastrarInscricao(novoInscricao);
+            /* bool resp = true;
+            try {
+                var i = inscricao.MapTo(new Inscricao
+                {
+                    pessoajuridica_id = inscricao.pessoajuridica.cnpj,
+                    segmento_id = inscricao.segmento.id,
+                    pessoajuridica = inscricao.pessoajuridica,
+                    segmento = inscricao.segmento,
+                    flgativo = inscricao.flgativo,
+                    nomeiniciativa = inscricao.nomeiniciativa,
+                    objetivos = inscricao.objetivos,
+                    publicoalvo = inscricao.publicoalvo,
+                }); 
+                _context.inscricao.Add(i);  
+                _context.SaveChanges();
+            } catch {
+              resp = false;
+            } */
+            bool resp = _inscricaoService.CadastrarInscricao(inscricao);
             if(resp){
                 return "Solicitação executada com sucesso!";
             }
             else{
                 return "falha ao executar a socilitação"; 
-            }   */       
-            var i = inscricao.MapTo(new Inscricao
-            {
-                pessoajuridica_id = inscricao.pessoajuridica.cnpj,
-                segmento_id = inscricao.segmento.id,
-                pessoajuridica = inscricao.pessoajuridica,
-                segmento = inscricao.segmento,
-                flgativo = inscricao.flgativo,
-                nomeiniciativa = inscricao.nomeiniciativa,
-                objetivos = inscricao.objetivos,
-                publicoalvo = inscricao.publicoalvo,
-            }); 
-            _context.inscricao.Add(i);  
-            await _context.SaveChangesAsync();
-            return new InscricaoDTO(i);
+            }         
         }
     }
 }

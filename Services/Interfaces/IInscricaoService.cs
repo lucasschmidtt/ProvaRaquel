@@ -10,6 +10,6 @@ namespace edital.Services.Interfaces
         // retornar a inscricoes/inscricao de uma pessoa juridica
         List<Inscricao> GetInscricoesPessoaJuridica(int pessoajuridica_id);
         // cadastrar uma inscricao de uma pessoa juridica
-        //Task<ActionResult> CadastrarInscricao(InscricaoDTO Inscricao);    
+        bool CadastrarInscricao(InscricaoDTO Inscricao);    
     }
 }

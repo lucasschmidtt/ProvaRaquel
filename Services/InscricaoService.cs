@@ -16,41 +16,47 @@ namespace edital.Services
           {
               _context = context;
           }
-      /* public async Task<ActionResult> CadastrarInscricao(InscricaoDTO inscricao)
+      public bool CadastrarInscricao(InscricaoDTO inscricao)
       {
-            //bool resp = true;
-            var i = inscricao.MapTo(new Inscricao
-            {
-                pessoajuridica_id = inscricao.pessoajuridica.cnpj,
-                segmento_id = inscricao.segmento.id,
-                pessoajuridica = inscricao.pessoajuridica,
-                segmento = inscricao.segmento,
-                flgativo = inscricao.flgativo,
-                nomeiniciativa = inscricao.nomeiniciativa,
-                objetivos = inscricao.objetivos,
-                publicoalvo = inscricao.publicoalvo,
-            }
-            );
-            try
-            {
-                //int cnpj = inscricao.pessoajuridica.cnpj;
-                _context.inscricao.Add(i);
-                // _context.segmento.Add(inscricao.segmento);
-                // _context.edital.Add(inscricao.segmento.edital);
-                //_context.pessoajuridica.Add(inscricao.pessoajuridica);
-                // _context.representante.Add(inscricao.pessoajuridica.representante);
-                // _context.endereco.Add(inscricao.pessoajuridica.endereco);
-                // _context.cidade.Add(inscricao.pessoajuridica.endereco.cidade);
-                // _context.estado.Add(inscricao.pessoajuridica.endereco.cidade.estado);
-                // _context.contato.Add(inscricao.pessoajuridica.contato);
-                // _context.endereco.Add(inscricao.pessoajuridica.endereco);
-                return await _context.SaveChangesAsync();
-            } catch (Exception ex){
-                Console.WriteLine(ex);
-                return null;
-            }
-            //return resp;
-            } */
+          bool resp = true;
+          try {
+              var i = inscricao.MapTo(new Inscricao
+              {
+                  pessoajuridica_id = inscricao.pessoajuridica.cnpj,
+                  segmento_id = inscricao.segmento.id,
+                  pessoajuridica = inscricao.pessoajuridica,
+                  segmento = inscricao.segmento,
+                  flgativo = inscricao.flgativo,
+                  nomeiniciativa = inscricao.nomeiniciativa,
+                  objetivos = inscricao.objetivos,
+                  publicoalvo = inscricao.publicoalvo,
+              }); 
+              _context.inscricao.Add(i);  
+              _context.SaveChanges();
+          } catch {
+            resp = false;
+          }
+          return resp;
+          /* try
+          {
+              //int cnpj = inscricao.pessoajuridica.cnpj;
+              _context.inscricao.Add(i);
+              // _context.segmento.Add(inscricao.segmento);
+              // _context.edital.Add(inscricao.segmento.edital);
+              //_context.pessoajuridica.Add(inscricao.pessoajuridica);
+              // _context.representante.Add(inscricao.pessoajuridica.representante);
+              // _context.endereco.Add(inscricao.pessoajuridica.endereco);
+              // _context.cidade.Add(inscricao.pessoajuridica.endereco.cidade);
+              // _context.estado.Add(inscricao.pessoajuridica.endereco.cidade.estado);
+              // _context.contato.Add(inscricao.pessoajuridica.contato);
+              // _context.endereco.Add(inscricao.pessoajuridica.endereco);
+              return await _context.SaveChangesAsync();
+          } catch (Exception ex){
+              Console.WriteLine(ex);
+              return null;
+          }
+          //return resp; */
+      }
 
       public List<Inscricao> GetInscricoesPessoaJuridica(int pessoajuridica_id)
       {
