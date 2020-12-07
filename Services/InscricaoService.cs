@@ -20,17 +20,6 @@ namespace edital.Services
       {
           bool resp = true;
           try {
-              /* var i = inscricao.MapTo(new Inscricao
-              {
-                  pessoajuridica_id = inscricao.pessoajuridica.cnpj,
-                  segmento_id = inscricao.segmento.id,
-                  pessoajuridica = inscricao.pessoajuridica,
-                  segmento = inscricao.segmento,
-                  flgativo = inscricao.flgativo,
-                  nomeiniciativa = inscricao.nomeiniciativa,
-                  objetivos = inscricao.objetivos,
-                  publicoalvo = inscricao.publicoalvo,
-              });  */
               _context.inscricao.Add(inscricao);  
               _context.SaveChanges();
           } catch {
@@ -41,7 +30,7 @@ namespace edital.Services
 
       public List<Inscricao> GetInscricoesPessoaJuridica(int pessoajuridica_id)
       {
-          return _context.inscricao
+          return _context.inscricao.Include(i => i.pessoajuridica)
             .Where(e => e.pessoajuridica_id == pessoajuridica_id)
             .ToList();
       }
@@ -50,8 +39,22 @@ namespace edital.Services
       {
           List<Inscricao> inscricoes = new List<Inscricao>();
 
-          inscricoes = _context.inscricao.ToList();
+          inscricoes = _context.inscricao.Include(i => i.pessoajuridica).ToList();
           return inscricoes;
+      }
+
+      public bool GetPessoaSegmento(int id)
+      {
+          Segmento segmento = _context.segmento.SingleOrDefault(e => e.id == id);
+          if(segmento == null)
+          {
+            return false;
+          } else {
+            _context.segmento.Update(segmento);
+            _context.SaveChanges();
+            return true;
+          }
+
       }
   }
 }

@@ -5,7 +5,7 @@ namespace edital.Services.Interfaces
 {
     public interface IPessoaJuridicaService
     {
-        // atualizar dados de uma pessoa juridica cadastrada
         bool AtualizarPessoaJuridica(PessoaJuridica pessoaJuridica);
+        bool GetPessoaJuridica(int cnpj);
     }
 }

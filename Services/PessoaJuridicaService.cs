@@ -30,5 +30,19 @@ namespace edital.Services
                 return false;
             } 
         }
+
+      public bool GetPessoaJuridica(int cnpj)
+      {
+          PessoaJuridica pessoajuridica = _context.pessoajuridica.SingleOrDefault(e => e.cnpj == cnpj);
+          if(pessoajuridica == null)
+          {
+            return false;
+          } else {
+            _context.pessoajuridica.Update(pessoajuridica);
+            _context.SaveChanges();
+            return true;
+          }
+
+      }
     }
 }

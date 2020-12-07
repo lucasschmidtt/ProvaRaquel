@@ -29,9 +29,7 @@ namespace edital.Controllers
         //PUT: api/inscricoes
         [HttpPut]
         public ActionResult<string> AtualizarPessoaJuridica(PessoaJuridica pessoaJuridica)
-        { 
-            //InscricaoDTO jsonString = JsonSerializer.Deserialize<InscricaoDTO>(novoInscricao);
-            
+        {            
             bool resp = _pessoaJuridicaService.AtualizarPessoaJuridica(pessoaJuridica);
             if(resp){
                 return "Solicitação executada com sucesso!";
