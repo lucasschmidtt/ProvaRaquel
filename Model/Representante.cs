@@ -3,7 +3,20 @@ namespace edital.Model
 {
     public class Representante
     {
-        [Key]
+    public Representante()
+    {
+    }
+
+    public Representante(int id, string nome, string cpf, Contato contato, Endereco endereco)
+    {
+      this.id = id;
+      this.nome = nome;
+      this.cpf = cpf;
+      this.contato = contato;
+      this.endereco = endereco;
+    }
+
+    [Key]
         public int id { get; set; }
         [Required]
         public string nome { get; set; }

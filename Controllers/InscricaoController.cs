@@ -20,18 +20,12 @@ namespace edital.Controllers
     public class InscricaoController : ControllerBase
     {        
         private readonly IInscricaoService _inscricaoService;
-        //private readonly ApplicationDbContext _context;
 
         public InscricaoController(IInscricaoService inscricaoService)
         {
             _inscricaoService = inscricaoService;
         }
-        /* public InscricaoController(ApplicationDbContext context)
-          {
-            _context = context;
-          } */
 
-        // GET: api/Inscricao
         [HttpGet]
         public ActionResult<List<Inscricao>> GetInscricoes()
         {
@@ -47,26 +41,8 @@ namespace edital.Controllers
 
         //POST: api/Inscricao
         [HttpPost]
-        public ActionResult<string> PostInscricao(InscricaoDTO inscricao)
+        public ActionResult<string> PostInscricao(Inscricao inscricao)
         { 
-            /* bool resp = true;
-            try {
-                var i = inscricao.MapTo(new Inscricao
-                {
-                    pessoajuridica_id = inscricao.pessoajuridica.cnpj,
-                    segmento_id = inscricao.segmento.id,
-                    pessoajuridica = inscricao.pessoajuridica,
-                    segmento = inscricao.segmento,
-                    flgativo = inscricao.flgativo,
-                    nomeiniciativa = inscricao.nomeiniciativa,
-                    objetivos = inscricao.objetivos,
-                    publicoalvo = inscricao.publicoalvo,
-                }); 
-                _context.inscricao.Add(i);  
-                _context.SaveChanges();
-            } catch {
-              resp = false;
-            } */
             bool resp = _inscricaoService.CadastrarInscricao(inscricao);
             if(resp){
                 return "Solicitação executada com sucesso!";

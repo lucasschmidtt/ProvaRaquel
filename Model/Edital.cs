@@ -6,7 +6,21 @@ namespace edital.Model
 {
     public class Edital
     {
-        [Key]
+    public Edital()
+    {
+    }
+
+    public Edital(int id, string nome, DateTime datainicio, DateTime? datafim, int vigencia, List<Segmento> segmentos)
+    {
+      this.id = id;
+      this.nome = nome;
+      this.datainicio = datainicio;
+      this.datafim = datafim;
+      this.vigencia = vigencia;
+      this.segmentos = segmentos;
+    }
+
+    [Key]
         public int id { get; set; }
         [Required]
         public string nome { get; set; }

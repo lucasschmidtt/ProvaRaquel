@@ -3,7 +3,22 @@ namespace edital.Model
 {
     public class Endereco
     {
-        [Key]
+    public Endereco()
+    {
+    }
+
+    public Endereco(int id, string logradouro, string bairro, string complemento, string numero, string cep, Cidade cidade)
+    {
+      this.id = id;
+      this.logradouro = logradouro;
+      this.bairro = bairro;
+      this.complemento = complemento;
+      this.numero = numero;
+      this.cep = cep;
+      this.cidade = cidade;
+    }
+
+    [Key]
         public int id { get; set; }
         [Required]
         public string logradouro { get; set; }
