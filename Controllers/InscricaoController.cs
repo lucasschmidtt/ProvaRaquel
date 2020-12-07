@@ -17,19 +17,19 @@ namespace edital.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InscricaoController : Controller
+    public class InscricaoController : ControllerBase
     {        
         private readonly IInscricaoService _inscricaoService;
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
 
         public InscricaoController(IInscricaoService inscricaoService)
         {
             _inscricaoService = inscricaoService;
         }
-        public InscricaoController(ApplicationDbContext context)
+        /* public InscricaoController(ApplicationDbContext context)
           {
             _context = context;
-          }
+          } */
 
         // GET: api/Inscricao
         [HttpGet]
@@ -47,7 +47,7 @@ namespace edital.Controllers
 
         //POST: api/Inscricao
         [HttpPost]
-        public ActionResult<string> CadastrarInscricao(InscricaoDTO inscricao)
+        public ActionResult<string> PostInscricao(InscricaoDTO inscricao)
         { 
             /* bool resp = true;
             try {
