@@ -44,41 +44,66 @@ namespace edital.Controllers
 
         //POST: api/Inscricao
         [HttpPost]
-        public ActionResult<string> PostInscricao(Inscricao inscricao)
+        public ActionResult<string> PostInscricao(Inscricao novainscricao)
         { 
-            if (inscricao.pessoajuridica.cnpj > 0) 
-            {
-              PessoaJuridica pessoajuridica = _pessoaJuridicaService.GetPessoaJuridica(inscricao.pessoajuridica.cnpj); 
-              if(pessoajuridica != null){
-                inscricao.pessoajuridica = pessoajuridica;
-              }
-            }
+            bool resp = false;
 
-            if (inscricao.segmento.id > 0) 
+            if(novainscricao.segmento == null || novainscricao.pessoajuridica == null)
             {
-              Segmento segmento = _inscricaoService.GetPessoaSegmento(inscricao.segmento.id);
-              if(segmento != null){
-                inscricao.segmento = segmento;
-              }
-            }
-
-            if (inscricao.pessoajuridica.endereco.cidade.estado.id > 0) 
+                resp = false;
+            } else if (novainscricao.pessoajuridica.cnpj > 0 && novainscricao.segmento.id > 0) 
             {
-              Estado estado = _estadoService.GetEstado(inscricao.pessoajuridica.endereco.cidade.estado.id);
-              if (estado != null)
-              {
-                inscricao.pessoajuridica.endereco.cidade.estado = estado;
-              }
+                Inscricao inscricao = new Inscricao();
                 
+                PessoaJuridica pessoajuridica = _pessoaJuridicaService.GetPessoaJuridica(novainscricao.pessoajuridica.cnpj); 
+
+                if(pessoajuridica != null)
+                {
+                    inscricao.pessoajuridica = pessoajuridica;
+                } else{
+                    inscricao.pessoajuridica = novainscricao.pessoajuridica;
+                }
+
+                Segmento segmento = _inscricaoService.GetPessoaSegmento(novainscricao.segmento.id);
+
+                if(segmento != null)
+                {
+                    inscricao.segmento = segmento;
+                } else{
+                    inscricao.segmento = novainscricao.segmento;
+                }
+
+                Estado estado = _estadoService.GetEstado(novainscricao.pessoajuridica.endereco.cidade.estado.id);
+        
+                if (estado != null)
+                {
+                    inscricao.pessoajuridica.endereco.cidade.estado = estado;
+                } else {
+                    inscricao.pessoajuridica.endereco.cidade.estado.id = 0;
+                }
+
+                Cidade cidade = _cidadeService.GetCidade(novainscricao.pessoajuridica.endereco.cidade.id);
+        
+                if (cidade != null)
+                {
+                    inscricao.pessoajuridica.endereco.cidade = cidade;
+                } else {
+                    inscricao.pessoajuridica.endereco.cidade.id = 0;
+                }
+
+                resp = _inscricaoService.CadastrarInscricao(inscricao);        
+            } else 
+            {
+                resp = _inscricaoService.CadastrarInscricao(novainscricao);            
             }
 
-            bool resp = _inscricaoService.CadastrarInscricao(inscricao);
             if(resp){
                 return "Solicitação executada com sucesso!";
             }
             else{
                 return "falha ao executar a socilitação"; 
             }         
+
         }
     }
 }
