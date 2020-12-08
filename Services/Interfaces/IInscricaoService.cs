@@ -8,6 +8,7 @@ namespace edital.Services.Interfaces
         List<Inscricao> GetInscricoes();
         List<Inscricao> GetInscricoesPessoaJuridica(int pessoajuridica_id);
         bool CadastrarInscricao(Inscricao Inscricao);    
-        bool GetPessoaSegmento(int id);    
+        Segmento GetPessoaSegmento(int id);    
+        Representante GetRepresentante(int id);    
     }
 }

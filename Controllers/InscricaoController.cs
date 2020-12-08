@@ -21,11 +21,13 @@ namespace edital.Controllers
     {        
         private readonly IInscricaoService _inscricaoService;
         private readonly IPessoaJuridicaService _pessoaJuridicaService;
+        private readonly ICidadesService _cidadeService;
 
-        public InscricaoController(IInscricaoService inscricaoService, IPessoaJuridicaService pessoaJuridicaService)
+        public InscricaoController(IInscricaoService inscricaoService, IPessoaJuridicaService pessoaJuridicaService, ICidadesService cidadeService)
         {
             _inscricaoService = inscricaoService;
             _pessoaJuridicaService = pessoaJuridicaService;
+            _cidadeService = cidadeService;
         }
 
         [HttpGet]
@@ -47,13 +49,18 @@ namespace edital.Controllers
         { 
             if (inscricao.pessoajuridica.cnpj > 0) 
             {
-              inscricao.pessoajuridica = _pessoaJuridicaService.GetPessoaJuridica(inscricao.pessoajuridica.cnpj);
-              
+              inscricao.pessoajuridica = _pessoaJuridicaService.GetPessoaJuridica(inscricao.pessoajuridica.cnpj); 
             }
-            /* if (inscricao.segmento.id > 0) 
+
+            if (inscricao.segmento.id > 0) 
             {
               inscricao.segmento = _inscricaoService.GetPessoaSegmento(inscricao.segmento.id);
-            } */
+            }
+
+            if (inscricao.pessoajuridica.endereco.cidade.id > 0) 
+            {
+              inscricao.pessoajuridica.endereco.cidade = _cidadeService.GetCidade(inscricao.pessoajuridica.endereco.cidade.id);
+            }
 
             bool resp = _inscricaoService.CadastrarInscricao(inscricao);
             if(resp){

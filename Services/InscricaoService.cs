@@ -43,18 +43,15 @@ namespace edital.Services
           return inscricoes;
       }
 
-      public bool GetPessoaSegmento(int id)
+      public Segmento GetPessoaSegmento(int id)
       {
-          Segmento segmento = _context.segmento.SingleOrDefault(e => e.id == id);
-          if(segmento == null)
-          {
-            return false;
-          } else {
-            _context.segmento.Update(segmento);
-            _context.SaveChanges();
-            return true;
-          }
-
+          Segmento segmento = _context.segmento.Include(i => i.edital).SingleOrDefault(e => e.id == id);
+          return segmento;
+      }
+      public Representante GetRepresentante(int id)
+      {
+          Representante representante = _context.representante.Include(i => i.contato).Include(i => i.endereco).SingleOrDefault(e => e.id == id);
+          return representante;
       }
   }
 }

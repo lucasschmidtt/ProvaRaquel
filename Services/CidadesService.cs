@@ -30,7 +30,7 @@ namespace edital.Services
         public Cidade GetCidade(int id)
         {
             //select * from Cidade where id = ?
-            return _context.cidade.SingleOrDefault(e => e.id == id);          
+            return _context.cidade.Include(c => c.estado).SingleOrDefault(e => e.id == id);          
         }
 
         //cadastra um novo Cidade na tabela
