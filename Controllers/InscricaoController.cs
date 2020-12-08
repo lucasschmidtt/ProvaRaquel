@@ -49,18 +49,24 @@ namespace edital.Controllers
         { 
             if (inscricao.pessoajuridica.cnpj > 0) 
             {
-              inscricao.pessoajuridica = _pessoaJuridicaService.GetPessoaJuridica(inscricao.pessoajuridica.cnpj); 
+              PessoaJuridica pessoajuridica = _pessoaJuridicaService.GetPessoaJuridica(inscricao.pessoajuridica.cnpj); 
+              if(pessoajuridica != null){
+                inscricao.pessoajuridica = pessoajuridica;
+              }
             }
 
             if (inscricao.segmento.id > 0) 
             {
-              inscricao.segmento = _inscricaoService.GetPessoaSegmento(inscricao.segmento.id);
+              Segmento segmento = _inscricaoService.GetPessoaSegmento(inscricao.segmento.id);
+              if(segmento != null){
+                inscricao.segmento = segmento;
+              }
             }
 
-            if (inscricao.pessoajuridica.endereco.cidade.id > 0) 
+            /* if (inscricao.pessoajuridica.endereco.cidade.nome != null) 
             {
               inscricao.pessoajuridica.endereco.cidade = _cidadeService.GetCidade(inscricao.pessoajuridica.endereco.cidade.id);
-            }
+            } */
 
             bool resp = _inscricaoService.CadastrarInscricao(inscricao);
             if(resp){
