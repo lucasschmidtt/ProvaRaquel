@@ -22,9 +22,10 @@ namespace edital.Services
           try {
               _context.inscricao.Add(inscricao);  
               _context.SaveChanges();
-          } catch {
+          } catch(Exception ex) {
               resp = false;
-          }
+              Console.WriteLine(ex);
+            }
           return resp;
       }
 
