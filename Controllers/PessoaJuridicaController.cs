@@ -26,17 +26,22 @@ namespace edital.Controllers
             _pessoaJuridicaService = pessoaJuridicaService;
         }
 
-        //PUT: api/inscricoes
-        [HttpPut]
-        public ActionResult<string> AtualizarPessoaJuridica(PessoaJuridica pessoaJuridica)
-        {            
+        //PUT: api/inscricoes/{id}
+        [HttpPut("{id}")]
+        public ActionResult<PessoaJuridica> AtualizarPessoaJuridica(int id, PessoaJuridica pessoaJuridica)
+        {         
+            if (id != pessoaJuridica.cnpj)
+            {
+                return BadRequest();
+            }   
             bool resp = _pessoaJuridicaService.AtualizarPessoaJuridica(pessoaJuridica);
-            if(resp){
-                return "Solicitação executada com sucesso!";
+            if(!resp){
+                return NotFound();
             }
-            else{
-                return "Falha ao executar a solicitação!"; 
-            }           
+
+            pessoaJuridica = _pessoaJuridicaService.GetPessoaJuridica(id);
+
+            return pessoaJuridica;          
         }
     }
 }
