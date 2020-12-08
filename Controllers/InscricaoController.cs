@@ -35,10 +35,10 @@ namespace edital.Controllers
         }
 
         // GET: api/Inscricao/{pessoajuridica_id}
-        [HttpGet("{pessoajuridica_id}/{segmento_id}")]
-        public ActionResult<List<Inscricao>> GetInscricoesPessoaJuridica(int pessoajuridica_id, int segmento_id)
+        [HttpGet("{pessoajuridica_id}")]
+        public ActionResult<List<Inscricao>> GetInscricoesPessoaJuridica(int pessoajuridica_id)
         {
-          return _inscricaoService.GetInscricoesPessoaJuridica(pessoajuridica_id, segmento_id);
+          return _inscricaoService.GetInscricoesPessoaJuridica(pessoajuridica_id);
         }
 
         //POST: api/Inscricao
@@ -47,12 +47,13 @@ namespace edital.Controllers
         { 
             if (inscricao.pessoajuridica.cnpj > 0) 
             {
-              _pessoaJuridicaService.GetPessoaJuridica(inscricao.pessoajuridica.cnpj);
+              inscricao.pessoajuridica = _pessoaJuridicaService.GetPessoaJuridica(inscricao.pessoajuridica.cnpj);
+              
             }
-            if (inscricao.segmento.id > 0) 
+            /* if (inscricao.segmento.id > 0) 
             {
-              _inscricaoService.GetPessoaSegmento(inscricao.segmento.id);
-            }
+              inscricao.segmento = _inscricaoService.GetPessoaSegmento(inscricao.segmento.id);
+            } */
 
             bool resp = _inscricaoService.CadastrarInscricao(inscricao);
             if(resp){

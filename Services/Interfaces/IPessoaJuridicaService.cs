@@ -6,6 +6,6 @@ namespace edital.Services.Interfaces
     public interface IPessoaJuridicaService
     {
         bool AtualizarPessoaJuridica(PessoaJuridica pessoaJuridica);
-        bool GetPessoaJuridica(int cnpj);
+        PessoaJuridica GetPessoaJuridica(int cnpj);
     }
 }

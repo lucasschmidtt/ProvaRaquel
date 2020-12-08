@@ -31,17 +31,10 @@ namespace edital.Services
             } 
         }
 
-      public bool GetPessoaJuridica(int cnpj)
+      public PessoaJuridica GetPessoaJuridica(int cnpj)
       {
-          PessoaJuridica pessoajuridica = _context.pessoajuridica.SingleOrDefault(e => e.cnpj == cnpj);
-          if(pessoajuridica == null)
-          {
-            return false;
-          } else {
-            _context.pessoajuridica.Update(pessoajuridica);
-            _context.SaveChanges();
-            return true;
-          }
+          PessoaJuridica pessoajuridica = _context.pessoajuridica.Include(i => i.endereco).Include(i => i.representante).Include(i => i.contato).SingleOrDefault(e => e.cnpj == cnpj);
+          return pessoajuridica;
 
       }
     }

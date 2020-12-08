@@ -28,9 +28,9 @@ namespace edital.Services
           return resp;
       }
 
-      public List<Inscricao> GetInscricoesPessoaJuridica(int pessoajuridica_id, int segmento_id)
+      public List<Inscricao> GetInscricoesPessoaJuridica(int pessoajuridica_id)
       {
-          return _context.inscricao.Include(i => i.pessoajuridica).Include(i => i.segmento_id)
+          return _context.inscricao.Include(i => i.pessoajuridica)
             .Where(e => e.pessoajuridica_id == pessoajuridica_id)
             .ToList();
       }
