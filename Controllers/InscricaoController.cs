@@ -35,10 +35,10 @@ namespace edital.Controllers
         }
 
         // GET: api/Inscricao/{pessoajuridica_id}
-        [HttpGet("{pessoajuridica_id}")]
-        public ActionResult<List<Inscricao>> GetInscricoesPessoaJuridica(int pessoajuridica_id)
+        [HttpGet("{pessoajuridica_id}/{segmento_id}")]
+        public ActionResult<List<Inscricao>> GetInscricoesPessoaJuridica(int pessoajuridica_id, int segmento_id)
         {
-          return _inscricaoService.GetInscricoesPessoaJuridica(pessoajuridica_id);
+          return _inscricaoService.GetInscricoesPessoaJuridica(pessoajuridica_id, segmento_id);
         }
 
         //POST: api/Inscricao
