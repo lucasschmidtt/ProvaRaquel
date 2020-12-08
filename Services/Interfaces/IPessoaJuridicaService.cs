@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using edital.Model;
 
 namespace edital.Services.Interfaces

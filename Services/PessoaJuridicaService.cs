@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Collections.Generic;
 using edital.Data;
 using edital.Model;
 using edital.Services.Interfaces;
@@ -31,11 +30,11 @@ namespace edital.Services
             } 
         }
 
-      public PessoaJuridica GetPessoaJuridica(int cnpj)
-      {
-          PessoaJuridica pessoajuridica = _context.pessoajuridica.Include(i => i.endereco).Include(i => i.representante).Include(i => i.contato).SingleOrDefault(e => e.cnpj == cnpj);
-          return pessoajuridica;
+        public PessoaJuridica GetPessoaJuridica(int cnpj)
+        {
+            PessoaJuridica pessoajuridica = _context.pessoajuridica.Include(i => i.endereco).Include(i => i.representante).Include(i => i.contato).SingleOrDefault(e => e.cnpj == cnpj);
+            return pessoajuridica;
 
-      }
+        }
     }
 }

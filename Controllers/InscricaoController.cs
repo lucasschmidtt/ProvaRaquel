@@ -9,9 +9,6 @@ using edital.Data;
 using edital.Model;
 using edital.Services;
 using edital.Services.Interfaces;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
 
 namespace edital.Controllers
 {

@@ -12,10 +12,11 @@ namespace edital.Services
   {
       private readonly ApplicationDbContext _context;
           
-          public InscricaoService(ApplicationDbContext context)
-          {
-              _context = context;
-          }
+      public InscricaoService(ApplicationDbContext context)
+      {
+          _context = context;
+      }
+      
       public bool CadastrarInscricao(Inscricao inscricao)
       {
           bool resp = true;
